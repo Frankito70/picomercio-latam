@@ -1,45 +1,55 @@
-// pages/tiendas.js
-import Link from 'next/link';
-
-const tiendasMock = [
-  {
-    id: 1,
-    nombre: 'Tienda Don Pepe',
-    rubro: 'Comida',
-    imagen: 'https://via.placeholder.com/300x180?text=Tienda+Don+Pepe'
-  },
-  {
-    id: 2,
-    nombre: 'Moda Latina',
-    rubro: 'Ropa',
-    imagen: 'https://via.placeholder.com/300x180?text=Moda+Latina'
-  },
-  {
-    id: 3,
-    nombre: 'Tecno Pi',
-    rubro: 'Electrónica',
-    imagen: 'https://via.placeholder.com/300x180?text=Tecno+Pi'
-  }
-];
-
-export default function Tiendas() {
+export default function CrearTienda() {
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-2xl font-bold text-center text-blue-800 mb-8">Explora Tiendas en PiComercio LATAM</h1>
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+        <h1 className="text-2xl font-bold mb-6 text-center text-indigo-700">
+          Crear Nueva Tienda
+        </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {tiendasMock.map(tienda => (
-          <div key={tienda.id} className="bg-white rounded-xl shadow p-4">
-            <img src={tienda.imagen} alt={tienda.nombre} className="w-full rounded-md mb-4" />
-            <h2 className="text-xl font-semibold text-gray-800">{tienda.nombre}</h2>
-            <p className="text-gray-600 mb-2">Rubro: {tienda.rubro}</p>
-            <Link href={`/tienda/${tienda.id}`}>
-              <span className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer">
-                Ver productos
-              </span>
-            </Link>
+        <form className="space-y-5">
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">Nombre de Tienda</label>
+            <input
+              type="text"
+              placeholder="Ej: Tienda Don Pepe"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
           </div>
-        ))}
+
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">Rubro o Categoría</label>
+            <input
+              type="text"
+              placeholder="Ej: Comida, Ropa, Tecnología"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">Descripción</label>
+            <textarea
+              rows="4"
+              placeholder="Cuéntanos sobre tu tienda..."
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">Imagen de portada (URL)</label>
+            <input
+              type="url"
+              placeholder="https://ejemplo.com/imagen.jpg"
+              className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition duration-300"
+          >
+            Guardar Tienda
+          </button>
+        </form>
       </div>
     </div>
   );

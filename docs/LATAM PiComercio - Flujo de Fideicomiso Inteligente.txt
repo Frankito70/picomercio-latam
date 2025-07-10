@@ -1,0 +1,49 @@
+# LATAM PiComercio - Flujo de Fideicomiso Inteligente
+
+## 📌 Descripción
+
+LATAM PiComercio implementa un sistema de fideicomiso asistido por IA (AIGen) para proteger transacciones entre compradores y vendedores que operan con la criptomoneda Pi. El pago se retiene hasta que ambas partes confirmen envío y recepción.
+
+---
+
+## 🧱 Estructura técnica del sistema
+
+| Paso | Archivo / Ruta                       | Función                                      |
+|------|--------------------------------------|----------------------------------------------|
+| 1️⃣   | `lib/fideicomisoSchema.js`           | Estructura base del modelo fiduciario        |
+| 2️⃣   | Tabla `fideicomisos` en Supabase     | Almacén de transacciones fiduciarias         |
+| 3️⃣   | `ConfirmacionEnvio.jsx`             | Vendedor confirma que envió el pedido        |
+| 4️⃣   | `ConfirmacionRecepcion.jsx`         | Comprador confirma que recibió               |
+| 5️⃣   | `validarFideicomisoAIGen.js`         | IA decide si liberar pago o abrir disputa    |
+| 6️⃣   | `liberarPagoPi.js`                  | Enviar Pi al vendedor vía SDK Pi Network     |
+
+---
+
+## 🔄 Estados de transacción
+
+- `pendiente`: esperando confirmaciones
+- `validando`: IA procesando condiciones
+- `liberado`: pago realizado con éxito
+- `en_disputa`: falta confirmación o tiempo excedido
+- `cancelado`: anulado por una de las partes
+
+---
+
+## 🧠 Evaluación IA
+
+AIGen analiza si:
+- Ambas partes confirmaron → ✅ Liberar pago
+- Envío confirmado sin recepción en X días → ⚠️ Disputa automática
+
+---
+
+## 💸 Liberación del pago
+
+Se usa `createPayment()` del SDK Pi:
+
+```js
+window.PiNetwork.createPayment({
+  amount: monto,
+  memo: "Pago liberado por LATAM PiComercio",
+  metadata: { tipo: "liberacion_fideicomiso", transaccion_id }
+}, callback);

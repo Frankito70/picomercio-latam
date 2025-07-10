@@ -56,18 +56,4 @@ export default function Publicidad() {
             padding: '1rem',
             textAlign: 'center'
           }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{promo.titulo}</h3>
-            <p style={{ fontSize: '1rem', marginBottom: '0.75rem' }}>{promo.mensaje}</p>
-            {promo.imagen_url && (
-              <img
-                src={promo.imagen_url}
-                alt={promo.titulo}
-                style={{ width: '100%', maxHeight: '180px', objectFit: 'cover', borderRadius: '6px' }}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+            <h3 style={{ fontSize: '1.2rem', margin

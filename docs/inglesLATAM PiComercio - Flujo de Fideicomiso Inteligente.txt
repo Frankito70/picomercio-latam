@@ -1,0 +1,55 @@
+
+---
+
+## 📄 2. English: `docs/fideicomiso-flow-en.md`
+
+```markdown
+# LATAM PiComercio - Intelligent Escrow Flow
+
+## 📌 Overview
+
+LATAM PiComercio implements an escrow system powered by AI (AIGen) to protect Pi-based transactions between buyers and sellers. Funds are held until both parties confirm shipping and delivery.
+
+---
+
+## 🧱 Technical structure
+
+| Step | File / Path                         | Function                                  |
+|------|-------------------------------------|-------------------------------------------|
+| 1️⃣   | `lib/fideicomisoSchema.js`           | Transaction model structure               |
+| 2️⃣   | Supabase `fideicomisos` table         | Stores fiduciary transactions             |
+| 3️⃣   | `ConfirmacionEnvio.jsx`             | Seller confirms item is shipped           |
+| 4️⃣   | `ConfirmacionRecepcion.jsx`         | Buyer confirms item is received           |
+| 5️⃣   | `validarFideicomisoAIGen.js`         | AI decides release or dispute             |
+| 6️⃣   | `liberarPagoPi.js`                  | Sends Pi to seller via Pi SDK             |
+
+---
+
+## 🔄 Transaction states
+
+- `pending`: waiting for confirmations
+- `validating`: AI is processing
+- `released`: payment sent to seller
+- `in_dispute`: delayed delivery or mismatch
+- `cancelled`: transaction aborted
+
+---
+
+## 🧠 AI Evaluation
+
+AIGen logic:
+- Both parties confirm → ✅ Release payment
+- Seller confirms, buyer delays → ⚠️ Flag dispute after X days
+
+---
+
+## 💸 Payment release
+
+Uses `createPayment()` from Pi SDK:
+
+```js
+window.PiNetwork.createPayment({
+  amount: amount,
+  memo: "Payment released by LATAM PiComercio",
+  metadata: { type: "escrow_release", transaccion_id }
+}, callback);

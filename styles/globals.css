@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌐 Fuente base */
+body {
+  @apply bg-piGray text-piPurple font-sans;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ✨ Titulares elegantes */
+h1, h2, h3 {
+  @apply text-piPurple font-bold;
+}
+
+/* 📦 Botones estilizados */
+.btn-primary {
+  @apply px-4 py-2 rounded text-white font-semibold bg-piPurple hover:bg-[#4a1c7d] transition-colors;
+}
+
+.btn-gold {
+  @apply px-4 py-2 rounded text-piPurple font-semibold bg-piGold hover:bg-[#e8a923] transition-colors;
+}
+
+/* 🖼️ Contenedor principal */
+.container {
+  @apply max-w-4xl mx-auto p-8;
+}
+
+/* 🖼️ Vista previa de imagen */
+.logo-preview {
+  @apply border border-piPurple rounded shadow-lg w-48 h-auto;
+}
+
+/* ⚠️ Mensajes de error */
+.error-msg {
+  @apply text-red-600 mt-2 font-medium;
+}
